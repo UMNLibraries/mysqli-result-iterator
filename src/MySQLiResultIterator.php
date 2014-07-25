@@ -1,13 +1,15 @@
 <?php
 
-class MySQLiResultIterator implements Iterator
+namespace UmnLib\Core;
+
+class MySQLiResultIterator implements \Iterator
 {
     protected $mysqli;
     public function mysqli()
     {
         return $this->mysqli;
     }
-    public function set_mysqli( $mysqli )
+    public function setMysqli($mysqli)
     {
         $this->mysqli = $mysqli;
     }
@@ -16,7 +18,7 @@ class MySQLiResultIterator implements Iterator
     {
         return $this->query;
     }
-    public function set_query( $query )
+    public function setQuery($query)
     {
         $this->query = $query;
     }
@@ -26,7 +28,7 @@ class MySQLiResultIterator implements Iterator
     {
         return $this->result;
     }
-    public function set_result( $result )
+    public function setResult($result)
     {
         $this->result = $result;
     }
@@ -36,7 +38,7 @@ class MySQLiResultIterator implements Iterator
     {
         return $this->position;
     }
-    public function set_position( $position )
+    public function setPosition($position)
     {
         $this->position = $position;
     }
@@ -46,7 +48,7 @@ class MySQLiResultIterator implements Iterator
     {
         return $this->row;
     }
-    public function set_row( $row )
+    public function setRow($row)
     {
         $this->row = $row;
     }
@@ -58,14 +60,14 @@ class MySQLiResultIterator implements Iterator
      */  
     function __construct($mysqli, $query)
     {
-        $this->set_mysqli( $mysqli );
-        $this->set_query( $query );
+        $this->setMysqli($mysqli);
+        $this->setQuery($query);
 
-        $result = $mysqli->query( $query );
+        $result = $mysqli->query($query);
         if (false === $result) {
             throw new Exception("MySQL Error: {$mysqli->errno}: {$mysqli->error}");
         }
-        $this->set_result( $result );
+        $this->setResult($result);
     }
     
     /** 
@@ -85,12 +87,12 @@ class MySQLiResultIterator implements Iterator
         $result = $this->result();
 
         // data_seek moves the results internal pointer  
-        $this->set_position( 0 );
-        $result->data_seek( $this->position() );  
+        $this->setPosition(0);
+        $result->data_seek($this->position());
     
         // prefetch the current row  
         // note that this advances the results internal pointer.  
-        $this->set_row( $result->fetch_assoc() );  
+        $this->setRow($result->fetch_assoc());
     }  
     
     /** 
@@ -99,8 +101,8 @@ class MySQLiResultIterator implements Iterator
     public function next()  
     {  
         // Prefetch the current row. 
-        $this->set_row( $this->result()->fetch_assoc() );  
-        $this->set_position( $this->position() + 1 );  
+        $this->setRow($this->result()->fetch_assoc());
+        $this->setPosition($this->position() + 1);
     }  
     
     /** 
@@ -129,6 +131,4 @@ class MySQLiResultIterator implements Iterator
     {  
         return $this->position();  
     }  
-
-} // end class MySQLiResultIterator
-
+}
