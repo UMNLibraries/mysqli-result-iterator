@@ -8,12 +8,12 @@ Install via [Composer](http://getcomposer.org). In your project's `composer.json
 
 ```json
   "require": {
-    "umnlib/mysqli-result-iterator": ">=1.0.0"
+    "umnlib/mysqli-result-iterator": "1.0.*"
   },
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.umn.edu:Libraries/mysqli-result-iterator.git"
+      "url": "git@github.com:UMNLibraries/mysqli-result-iterator.git"
     }
   ]
 ```
@@ -27,3 +27,6 @@ we should probably upgrade it to use PDO instead first.
 
 For older versions of this package that did not use Composer, see the `0.x.y` releases.
 
+## Attribution
+
+The University of Minnesota Libraries created this software for the [EthicShare](http://www.ethicshare.org/about) project.
